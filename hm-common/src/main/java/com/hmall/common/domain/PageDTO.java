@@ -58,4 +58,10 @@ public class PageDTO<T> {
     public static <T, R> PageDTO<T> of(Page<R> page, Class<T> clazz, Convert<R, T> convert) {
         return new PageDTO<>(page.getTotal(), page.getPages(), BeanUtils.copyList(page.getRecords(), clazz, convert));
     }
+
+    public static <T> PageDTO<T> of(Long total, Long pageNo, Long pages, List<T> list) {
+        // 计算总页数：向上取整 total/pageSize
+        long page = (pageNo - 1) * pages;  // 默认每页10条
+        return new PageDTO<>(total, page, list);
+    }
 }

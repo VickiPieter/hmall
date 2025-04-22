@@ -58,7 +58,7 @@ public class ItemListener {
         // 将DTO转换为Doc
         ItemDoc itemDoc = BeanUtil.copyProperties(itemDTO, ItemDoc.class);
         // 请求资源
-        IndexRequest source = new IndexRequest("item")
+        IndexRequest source = new IndexRequest("items")
                 .source(JSONUtil.toJsonStr(itemDoc), XContentType.JSON);
         // 发送请求
         restHighLevelClient.index(source, RequestOptions.DEFAULT);
